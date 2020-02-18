@@ -7,9 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.server.ResponseStatusException;
-
 import gr.hua.dit.ds.sitisi.ext.dao.UserDAO;
 import gr.hua.dit.ds.sitisi.ext.entity.Application;
 import gr.hua.dit.ds.sitisi.ext.entity.Score;
@@ -33,7 +32,7 @@ public class UserController {
 		try {
 			Student currentStudent = api.getForObject(apiCall, Student.class);
 			model.addAttribute("currentStudent", currentStudent);
-		} catch (ResponseStatusException e) {
+		} catch (HttpClientErrorException e) {
 			System.out.println("Please fill your info first");
 			return "redirect:/student/student-form";
 		}
@@ -65,7 +64,7 @@ public class UserController {
 		try {
 			Application application = api.getForObject(apiCall, Application.class);
 			model.addAttribute("application", application);
-		} catch(ResponseStatusException e) {
+		} catch(HttpClientErrorException e) {
 			System.out.println("Please apply first");
 			return "redirect:/student/application-form";
 		}
