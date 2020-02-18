@@ -16,7 +16,6 @@ import gr.hua.dit.ds.sitisi.ext.entity.Student;
 import gr.hua.dit.ds.sitisi.ext.entity.User;
 
 @Controller
-@RequestMapping("/student")
 public class UserController {
 	
 	private RestTemplate api = new RestTemplate();
@@ -24,7 +23,7 @@ public class UserController {
 	private UserDAO userDAO;
 	private User currentUser;
 	
-	@RequestMapping("")
+	@RequestMapping("/")
 	public String showHome(Model model, Principal principal) {
 		
 		currentUser = userDAO.findUserByUsername(principal.getName());
@@ -34,7 +33,7 @@ public class UserController {
 			model.addAttribute("currentStudent", currentStudent);
 		} catch (HttpClientErrorException e) {
 			System.out.println("Please fill your info first");
-			return "redirect:/student/student-form";
+			return "redirect:/student-form";
 		}
 		
 		return "student";
@@ -53,7 +52,7 @@ public class UserController {
 		newStudent.setCanSubmit(false);
 		
 		api.postForObject("http://localhost:8080/ds-sitisi/api/student", newStudent, Student.class);
-		return "redirect:/student";
+		return "redirect:/";
 	}
 	
 	@RequestMapping("/application")
@@ -66,7 +65,7 @@ public class UserController {
 			model.addAttribute("application", application);
 		} catch(HttpClientErrorException e) {
 			System.out.println("Please apply first");
-			return "redirect:/student/application-form";
+			return "redirect:/application-form";
 		}
 		
 		return "application";
@@ -84,7 +83,7 @@ public class UserController {
 		newApplication.setId(currentUser.getPersonal_id());
 		
 		api.postForObject("http://localhost:8080/ds-sitisi/api/application", newApplication, Application.class);
-		return "redirect:/student/application";
+		return "redirect:/application";
 	}
 
 	@RequestMapping("/score")
