@@ -7,22 +7,22 @@
 <div id="container">
 	<div id="content">
 		<!--  add our html table here -->
-		<table>
+		<table class="table table-bordered">
 			<tr>
-				<th>Income</th>
-				<th>City</th>
-				<th>Siblings</th>
-				<th>Documents</th>
+				<th scope="col">Income</th>
+				<th scope="col">City</th>
+				<th scope="col">Siblings</th>
+				<th scope="col">Documents</th>
 			</tr>
 			<tr>
 				<td>${application.income}</td>
 				<td>${application.homeCity}</td>
 				<td>${application.siblings}</td>
-				<td><input type="checkbox" <c:if test="${application.documents}">checked</c:if>></td>
+				<td><input class="form-check-input" type="checkbox" <c:if test="${application.documents}">checked</c:if>disabled></td>
 			</table>
 	</div>
 </div>
 
 <c:if test="${application.approved}">
-	<a href="<c:url value="/student/score"></c:url>" class="btn btn-link">See your score & Ranking</a>
+	<a href="<c:url value="/score"></c:url>" class="btn btn-secondary">See your score & Ranking</a>
 </c:if>

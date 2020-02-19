@@ -25,7 +25,7 @@
 
 <c:choose>
     <c:when test="${currentStudent.canSubmit}">
-        <a href="<c:url value="/student/application"></c:url>" class="btn btn-secondary">Apply for Board</a>
+        <a href="<c:url value="/application"></c:url>" class="btn btn-secondary">Apply for Board</a>
     </c:when>    
     <c:otherwise>
         Your account has not yet been approved. Please wait for permission before making an application. 
